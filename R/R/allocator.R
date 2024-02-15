@@ -107,6 +107,7 @@ robyn_allocator <- function(robyn_object = NULL,
                             export = TRUE,
                             quiet = FALSE,
                             ui = FALSE,
+                            set_hist_carryover_to_0 = FALSE
                             ...) {
   ### Use previously exported model using json_file
   if (!is.null(json_file)) {
@@ -412,6 +413,10 @@ robyn_allocator <- function(robyn_object = NULL,
   alphas_eval <- alphas[paste0(channel_for_allocation, "_alphas")]
   inflexions_eval <- inflexions[paste0(channel_for_allocation, "_gammas")]
   hist_carryover_eval <- hist_carryover[channel_for_allocation]
+
+if (set_hist_carryover_to_0) {
+  hist_carryover_eval <- rep(0, length(hist_carryover_eval))
+}
 
   eval_list <- list(
     coefs_eval = coefs_eval,
